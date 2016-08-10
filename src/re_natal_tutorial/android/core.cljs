@@ -5,30 +5,19 @@
 
 (def app-registry (.-AppRegistry ReactNative))
 (def text (r/adapt-react-class (.-Text ReactNative)))
-(def image (r/adapt-react-class (.-Image ReactNative)))
+(def view (r/adapt-react-class (.-View ReactNative)))
 
-(defn alert [title]
-      (.alert (.-Alert ReactNative) title))
+(defn greeting [name]
+  [text (str "Hello " name "!")])
 
-(defn hello-world-app []
-  [text "Hello world!"])
-
-
-(defn bananas []
-  (let [img (js/require "./images/Bananavarieties.jpg")]
-  ;; download the file into "images" directory
-  ;; When you have dropped a new image to "images" dir,
-  ;; you need to restart RN packager and re-run command:
-  ;; $ re-natal use-figwheel
-    [image {:source img}]))
-  ;; I don't know why, but the following code from the tutorial does not work.
-  ;; Seems to have something to do with figwheel.
-  ;; [image {:source
-  ;;           {:uri
-  ;;            "https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg"}}])
+(defn lots-of-greetings []
+  [view {:style {:align-items "center"}}
+    (greeting "Rexxar")
+    (greeting "Jaina")
+    (greeting "Valeera")])
 
 (defn app-root []
-  (bananas))
+  (lots-of-greetings))
 
 (defn init []
       (.registerComponent app-registry "Hello World" #(r/reactify-component app-root)))
