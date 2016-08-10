@@ -7,6 +7,7 @@
 (def text (r/adapt-react-class (.-Text ReactNative)))
 (def view (r/adapt-react-class (.-View ReactNative)))
 
+;; We use function arguments instead props, 'couse our components are functions
 (defn greeting [name]
   [text (str "Hello " name "!")])
 
