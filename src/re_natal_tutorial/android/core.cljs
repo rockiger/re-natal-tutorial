@@ -4,15 +4,7 @@
 (def ReactNative (js/require "react-native"))
 
 (def app-registry (.-AppRegistry ReactNative))
-(def text (r/adapt-react-class (.-Text ReactNative)))
 (def image (r/adapt-react-class (.-Image ReactNative)))
-
-(defn alert [title]
-      (.alert (.-Alert ReactNative) title))
-
-(defn hello-world-app []
-  [text "Hello world!"])
-
 
 (defn bananas []
   (let [img (js/require "./images/Bananavarieties.jpg")]
