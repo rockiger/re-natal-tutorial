@@ -7,18 +7,23 @@
 (def text (r/adapt-react-class (.-Text ReactNative)))
 (def view (r/adapt-react-class (.-View ReactNative)))
 
-;; We use function arguments instead props, 'couse our components are functions
-(defn greeting [name]
-  [text (str "Hello " name "!")])
+(defn blink [txt]
+  (let [show-text (r/atom true)]
+    (fn [txt]
+      (js/setTimeout #(swap! show-text not) 1000)
+      [text (if @show-text
+              txt
+              "")])))
 
-(defn lots-of-greetings []
+(defn blink-app []
   [view {:style {:align-items "center"}}
-    (greeting "Rexxar")
-    (greeting "Jaina")
-    (greeting "Valeera")])
+    [blink "I love to blink"]
+    [blink "Yes blinking is so great"]
+    [blink "Why did they ever take this out of HTML"]
+    [blink "Look at me look at me look at me"]])
 
 (defn app-root []
-  (lots-of-greetings))
+  [blink-app])
 
 (defn init []
       (.registerComponent app-registry "Hello World" #(r/reactify-component app-root)))
