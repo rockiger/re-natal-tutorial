@@ -7,23 +7,20 @@
 (def text (r/adapt-react-class (.-Text ReactNative)))
 (def view (r/adapt-react-class (.-View ReactNative)))
 
-(defn blink [txt]
-  (let [show-text (r/atom true)]
-    (fn [txt]
-      (js/setTimeout #(swap! show-text not) 1000)
-      [text (if @show-text
-              txt
-              "")])))
+(def styles {:bigblue {:color :blue
+                       :fontWeight :bold ; clojure style :font-weight did not work
+                       :fontSize 30}     ; clojure style :font-size did not work
+             :red     {:color :red}})
 
-(defn blink-app []
-  [view {:style {:align-items "center"}}
-    [blink "I love to blink"]
-    [blink "Yes blinking is so great"]
-    [blink "Why did they ever take this out of HTML"]
-    [blink "Look at me look at me look at me"]])
+(defn lots-of-styles []
+  [view
+    [text {:style (:red styles)} "just red"]
+    [text {:style (:bigblue styles)} "just bigblue"]
+    [text {:style [(:bigblue styles) (:red styles)]} "bigblue, then red"]
+    [text {:style [(:red styles) (:bigblue styles)]} "red, then bigblue"]])
 
 (defn app-root []
-  [blink-app])
+  [lots-of-styles])
 
 (defn init []
-      (.registerComponent app-registry "Hello World" #(r/reactify-component app-root)))
+      (.registerComponent app-registry "Re-Natal Tutorial" #(r/reactify-component app-root)))
