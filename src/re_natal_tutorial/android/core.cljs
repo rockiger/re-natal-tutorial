@@ -4,20 +4,13 @@
 (def ReactNative (js/require "react-native"))
 
 (def app-registry (.-AppRegistry ReactNative))
-(def text (r/adapt-react-class (.-Text ReactNative)))
 (def view (r/adapt-react-class (.-View ReactNative)))
-
-(def styles {:bigblue {:color :blue
-                       :fontWeight :bold ; clojure style :font-weight did not work
-                       :fontSize 30}     ; clojure style :font-size did not work
-             :red     {:color :red}})
 
 (defn lots-of-styles []
   [view
-    [text {:style (:red styles)} "just red"]
-    [text {:style (:bigblue styles)} "just bigblue"]
-    [text {:style [(:bigblue styles) (:red styles)]} "bigblue, then red"]
-    [text {:style [(:red styles) (:bigblue styles)]} "red, then bigblue"]])
+    [view {:style {:width 50 :height 50 :background-color :powderblue}}]
+    [view {:style {:width 100 :height 100 :background-color :skyblue}}]
+    [view {:style {:width 150 :height 150 :background-color :steelblue}}]])
 
 (defn app-root []
   [lots-of-styles])
