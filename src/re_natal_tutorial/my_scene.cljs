@@ -6,8 +6,10 @@
 (def text (r/adapt-react-class (.-Text ReactNative)))
 (def view (r/adapt-react-class (.-View ReactNative)))
 
-(defn my-scene []
-  (let [title "MyScene"]
-   (fn []
-    [view
-      [text (str "Hi! My name is " title)]])))
+(defn my-scene
+  ([]
+   [view
+    [text "Hi! My name is MyScene"]])
+  ([title]
+   [view
+      [text (str "Hi! My name is " title)]]))

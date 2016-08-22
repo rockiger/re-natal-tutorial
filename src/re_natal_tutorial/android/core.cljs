@@ -5,9 +5,15 @@
 (def ReactNative (js/require "react-native"))
 
 (def app-registry (.-AppRegistry ReactNative))
+(def navigator (r/adapt-react-class (.-Navigator ReactNative)))
+(def view (r/adapt-react-class (.-View ReactNative)))
+(def text (r/adapt-react-class (.-Text ReactNative)))
 
 (defn yo-dawg-app []
-  [ms/my-scene])
+  [navigator {:initial-route {:title "Awesome Scene" :index 0}
+              :render-scene (fn [route, navigator]
+                              (r/as-element
+                                (ms/my-scene (.-title route))))}])
 
 (defn app-root []
   [yo-dawg-app])
