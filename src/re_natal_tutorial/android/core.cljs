@@ -6,15 +6,9 @@
 (def app-registry (.-AppRegistry ReactNative))
 (def view (r/adapt-react-class (.-View ReactNative)))
 
-(defn justify-content-basics []
-  [view {:style
-         {:flex 1 :flex-direction :column :justify-content :space-between}}
-    [view {:style {:width 50 :height 50 :background-color :powderblue}}]
-    [view {:style {:width 50 :height 50 :background-color :skyblue}}]
-    [view {:style {:width 50 :height 50 :background-color :steelblue}}]])
-
 (defn app-root []
-  [justify-content-basics])
+  [view
+   [text "Hello world!"]])
 
 (defn init []
-      (.registerComponent app-registry "Re-Natal Tutorial" #(r/reactify-component app-root)))
+  (.registerComponent app-registry "ReNatalTutorial" #(r/reactify-component app-root)))
