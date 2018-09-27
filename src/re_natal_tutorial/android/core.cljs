@@ -6,11 +6,11 @@
 (def app-registry (.-AppRegistry ReactNative))
 (def text (r/adapt-react-class (.-Text ReactNative)))
 
-(defn hello-world []
-  [text "Hello world!"])
+(def view (r/adapt-react-class (.-View ReactNative)))
 
 (defn app-root []
-    (hello-world))
+  [view
+   [text "Hello world!"]])
 
 (defn init []
-      (.registerComponent app-registry "Hello World" #(r/reactify-component app-root)))
+  (.registerComponent app-registry "ReNatalTutorial" #(r/reactify-component app-root)))
