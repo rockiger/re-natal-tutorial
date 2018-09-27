@@ -4,14 +4,11 @@
 (def ReactNative (js/require "react-native"))
 
 (def app-registry (.-AppRegistry ReactNative))
-(def list-view (r/adapt-react-class (.-ListView ReactNative)))
-(def data-source (.-DataSource (.-ListView ReactNative)))
-(def text (r/adapt-react-class (.-Text ReactNative)))
-(def view (r/adapt-react-class (.-View ReactNative)))
+(def image (r/adapt-react-class (.-Image ReactNative)))
 
 (defn app-root []
-  [view
-   [text "Hello world!"]])
+  [image {:source {:uri "https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg"}
+          :style {:width 193 :height 110}}])
 
 (defn init []
   (.registerComponent app-registry "ReNatalTutorial" #(r/reactify-component app-root)))
