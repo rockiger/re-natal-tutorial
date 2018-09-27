@@ -46,6 +46,8 @@ buck-out/
 index.android.js
 index.ios.js
 target/
+.re-natal.local
+env/dev/env/config.cljs
 
 # Figwheel
 #
