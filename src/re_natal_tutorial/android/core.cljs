@@ -7,13 +7,6 @@
 (def text (r/adapt-react-class (.-Text ReactNative)))
 (def view (r/adapt-react-class (.-View ReactNative)))
 
-(defn debug [obj]
-  (.warn js/console (.stringify js/JSON obj)))
-
-
-(defn alert [title]
-      (.alert (.-Alert ReactNative) title))
-
 (def state (r/atom ""))
 
 ;; Get the json
@@ -35,8 +28,8 @@
     [text @state]])
 
 (defn app-root []
-  [fetch-some-movies])
+  [view
+   [text "Hello world!"]])
 
 (defn init []
-      (.registerComponent app-registry "Re-Natal Tutorial"
-       #(r/reactify-component app-root)))
+  (.registerComponent app-registry "ReNatalTutorial" #(r/reactify-component app-root)))
