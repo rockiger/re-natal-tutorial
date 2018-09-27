@@ -7,23 +7,9 @@
 (def text (r/adapt-react-class (.-Text ReactNative)))
 (def view (r/adapt-react-class (.-View ReactNative)))
 
-(defn blink [txt]
-  (let [show-text (r/atom true)]
-    (fn [txt]
-      (js/setTimeout #(swap! show-text not) 1000)
-      [text (if @show-text
-              txt
-              "")])))
-
-(defn blink-app []
-  [view {:style {:align-items "center"}}
-    [blink "I love to blink"]
-    [blink "Yes blinking is so great"]
-    [blink "Why did they ever take this out of HTML"]
-    [blink "Look at me look at me look at me"]])
-
 (defn app-root []
-  [blink-app])
+  [view
+   [text "Hello world!"]])
 
 (defn init []
-      (.registerComponent app-registry "Hello World" #(r/reactify-component app-root)))
+  (.registerComponent app-registry "ReNatalTutorial" #(r/reactify-component app-root)))
