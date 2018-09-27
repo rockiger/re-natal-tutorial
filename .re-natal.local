@@ -1,7 +1,0 @@
-{
-  "platforms": {
-    "ios": {
-      "host": "localhost"
-    }
-  }
-}
