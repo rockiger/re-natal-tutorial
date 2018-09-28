@@ -4,11 +4,18 @@
 (def ReactNative (js/require "react-native"))
 
 (def app-registry (.-AppRegistry ReactNative))
-(def image (r/adapt-react-class (.-Image ReactNative)))
+(def text (r/adapt-react-class (.-Text ReactNative)))
+(def view (r/adapt-react-class (.-View ReactNative)))
+
+;; We use function arguments instead of props because our components are functions
+(defn greeting [name]
+  [text (str "Hello " name "!")])
 
 (defn app-root []
-  [image {:source {:uri "https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg"}
-          :style {:width 193 :height 110}}])
+  [view {:style {:align-items "center"}}
+   (greeting "Rexxar")
+   (greeting "Jaina")
+   (greeting "Valeera")])
 
 (defn init []
   (.registerComponent app-registry "ReNatalTutorial" #(r/reactify-component app-root)))
