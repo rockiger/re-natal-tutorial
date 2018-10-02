@@ -12,12 +12,15 @@
                        :fontSize 30}     ; clojure style :font-size did not work
              :red {:color :red}})
 
-(defn app-root []
+(defn lots-of-styles []
   [view
-   [text {:style (:red styles)} "just red"]
-   [text {:style (:bigblue styles)} "just bigblue"]
-   [text {:style [(:bigblue styles) (:red styles)]} "bigblue, then red"]
-   [text {:style [(:red stles) (:bigblue styles)]} "red, then bigblue"]])
+    [text {:style (:red styles)} "just red"]
+    [text {:style (:bigblue styles)} "just bigblue"]
+    [text {:style [(:bigblue styles) (:red styles)]} "bigblue, then red"]
+    [text {:style [(:red styles) (:bigblue styles)]} "red, then bigblue"]])
+
+(defn app-root []
+  [lots-of-styles])
 
 (defn init []
   (.registerComponent app-registry "ReNatalTutorial" #(r/reactify-component app-root)))
