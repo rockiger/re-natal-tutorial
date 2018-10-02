@@ -15,12 +15,15 @@
               txt
               "")])))
 
+(defn blink-app []
+  [view {:style {:align-items "center"}}
+    [blink "I love to blink"]
+    [blink "Yes blinking is so great"]
+    [blink "Why did they ever take this out of HTML"]
+    [blink "Look at me look at me look at me"]])
+
 (defn app-root []
-  [view
-   [blink "I love to blink"]
-   [blink "Yes blinking is so great"]
-   [blink "Why did they ever take this out of HTML"]
-   [blink "Look at me look at me look at me"]])
+  [blink-app])
 
 (defn init []
   (.registerComponent app-registry "ReNatalTutorial" #(r/reactify-component app-root)))
