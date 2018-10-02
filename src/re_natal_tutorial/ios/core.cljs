@@ -6,9 +6,12 @@
 (def app-registry (.-AppRegistry ReactNative))
 (def image (r/adapt-react-class (.-Image ReactNative)))
 
-(defn app-root []
+(defn bananas []
   [image {:source {:uri "https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg"}
           :style {:width 193 :height 110}}])
+
+(defn app-root []
+  [bananas])
 
 (defn init []
   (.registerComponent app-registry "ReNatalTutorial" #(r/reactify-component app-root)))
