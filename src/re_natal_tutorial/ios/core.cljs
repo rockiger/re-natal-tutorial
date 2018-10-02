@@ -11,11 +11,14 @@
 (defn greeting [name]
   [text (str "Hello " name "!")])
 
-(defn app-root []
+(defn lots-of-greetings []
   [view {:style {:align-items "center"}}
-   (greeting "Rexxar")
-   (greeting "Jaina")
-   (greeting "Valeera")])
+    (greeting "Rexxar")
+    (greeting "Jaina")
+    (greeting "Valeera")])
+
+(defn app-root []
+  [lots-of-greetings])
 
 (defn init []
   (.registerComponent app-registry "ReNatalTutorial" #(r/reactify-component app-root)))
