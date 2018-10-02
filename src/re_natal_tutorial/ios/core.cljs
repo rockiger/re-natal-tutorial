@@ -6,14 +6,14 @@
 (def app-registry (.-AppRegistry ReactNative))
 (def view (r/adapt-react-class (.-View ReactNative)))
 
-(defn flex-direction-basics []
-  [view {:style {:flex 1 :flex-direction :row}}
+(defn justify-content-basics []
+  [view {:style {:flex 1 :flex-direction :column :justify-content :space-between}}
    [view {:style {:width 50 :height 50 :background-color :powderblue}}]
    [view {:style {:width 50 :height 50 :background-color :skyblue}}]
    [view {:style {:width 50 :height 50 :background-color :steelblue}}]])
 
 (defn app-root []
-  [flex-direction-basics])
+  [justify-content-basics])
 
 (defn init []
   (.registerComponent app-registry "ReNatalTutorial" #(r/reactify-component app-root)))
