@@ -4,25 +4,34 @@
 (def ReactNative (js/require "react-native"))
 
 (def app-registry (.-AppRegistry ReactNative))
-(def flat-list (r/adapt-react-class (.-FlatList ReactNative)))
 (def text (r/adapt-react-class (.-Text ReactNative)))
 (def view (r/adapt-react-class (.-View ReactNative)))
 
-(def styles {:container {:flex 1
-                         :padding-top 22}
-             :item {:padding 10
-                    :fontSize 18
-                    :height 44}})
+(defn debug [obj]
+  (.warn js/console (.stringify js/JSON obj)))
 
-(defn flat-list-basics []
-  [view {:style (:container styles)}
-   [flat-list {:data #js["Devin" "Jackson" "James" "Joel" "John" "Jillian" "Jimmy" "Julie"]
-               :keyExtractor #(js* "Math.random().toString(32).slice(2)")
-               :render-item #(r/as-element [text {:style (:item styles)}
-                                            (get-in (js->clj % :keywordize-keys true) [:item])])}]])
+(def state (r/atom ""))
+
+;; Get the json
+(def request (new js/XMLHttpRequest))
+(set! (.-onreadystatechange request)
+      (fn [e]
+        (cond (not= (.-readyState request) 4)
+              nil
+              (= (.-status request) 200)
+              (reset! state (.-responseText request))
+              :else
+              (.warn js/console "error"))))
+
+(.open request "GET" "https://facebook.github.io/react-native/movies.json")
+(.send request)
+
+(defn fetch-example []
+  [view {:style {:flex 1 :padding-top 22}}
+   [text @state]])
 
 (defn app-root []
-  [flat-list-basics])
+  [fetch-example])
 
 (defn init []
   (.registerComponent app-registry "ReNatalTutorial" #(r/reactify-component app-root)))
