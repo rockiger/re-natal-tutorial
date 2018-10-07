@@ -1,5 +1,5 @@
 (ns re-natal-tutorial.db
-  (:require [cljs.spec :as s]))
+  (:require [clojure.spec.alpha :as s]))
 
 ;; spec of app-db
 (s/def ::greeting string?)

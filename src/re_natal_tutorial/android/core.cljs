@@ -8,10 +8,10 @@
 (def view (r/adapt-react-class (.-View ReactNative)))
 
 (defn blink [txt]
-  (let [show-text (r/atom true)]
+  (let [show-text? (r/atom true)]
     (fn [txt]
-      (js/setTimeout #(swap! show-text not) 1000)
-      [text (if @show-text
+      (js/setTimeout #(swap! show-text? not) 1000)
+      [text (if @show-text?
               txt
               "")])))
 
@@ -26,4 +26,4 @@
   [blink-app])
 
 (defn init []
-      (.registerComponent app-registry "Hello World" #(r/reactify-component app-root)))
+  (.registerComponent app-registry "ReNatalTutorial" #(r/reactify-component app-root)))
