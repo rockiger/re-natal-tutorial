@@ -4,31 +4,25 @@
 (def ReactNative (js/require "react-native"))
 
 (def app-registry (.-AppRegistry ReactNative))
-(def list-view (r/adapt-react-class (.-ListView ReactNative)))
-(def data-source (.-DataSource (.-ListView ReactNative)))
+(def flat-list (r/adapt-react-class (.-FlatList ReactNative)))
 (def text (r/adapt-react-class (.-Text ReactNative)))
 (def view (r/adapt-react-class (.-View ReactNative)))
 
-(defn- convert-to-array [vec]
-  "Vector -> JavaScript Array
-  consumes a Vector and produces an array, it is needed for
-  the list-view, because it only accepts an real JavaScript Array."
-  (let [arr #js[]] (doseq [x vec] (.push arr x)) arr))
+(def styles {:container {:flex 1
+                         :padding-top 22}
+             :item {:padding 10
+                    :fontSize 18
+                    :height 44}})
 
-(def ds (new data-source #js{:rowHasChanged #(not= %1 %2)}))
-
-(def state (.cloneWithRows ds ;; we are using global state
-             (convert-to-array ["John" "Joel" "James" "Jimmy" "Jackson"
-                                "Jillian" "Julie" "Devin"])))
-
-(defn list-view-basics []
-  [view {:style {:padding-top 22}}
-    [list-view {:dataSource state ;for whatever reason :data-source doesn't work
-                ;; Turn the vector into a React element
-                :render-row #(r/as-element [text %])}]])
+(defn flat-list-basics []
+  [view {:style (:container styles)}
+   [flat-list {:data #js["Devin" "Jackson" "James" "Joel" "John" "Jillian" "Jimmy" "Julie"]
+               :keyExtractor #(js* "Math.random().toString(32).slice(2)")
+               :render-item #(r/as-element [text {:style (:item styles)}
+                                            (get-in (js->clj % :keywordize-keys true) [:item])])}]])
 
 (defn app-root []
-  [list-view-basics])
+  [flat-list-basics])
 
 (defn init []
-      (.registerComponent app-registry "Re-Natal Tutorial" #(r/reactify-component app-root)))
+  (.registerComponent app-registry "ReNatalTutorial" #(r/reactify-component app-root)))
