@@ -8,12 +8,12 @@
 
 (defn flex-direction-basics []
   [view {:style {:flex 1 :flex-direction :row}}
-    [view {:style {:width 50 :height 50 :background-color :powderblue}}]
-    [view {:style {:width 50 :height 50 :background-color :skyblue}}]
-    [view {:style {:width 50 :height 50 :background-color :steelblue}}]])
+   [view {:style {:width 50 :height 50 :background-color :powderblue}}]
+   [view {:style {:width 50 :height 50 :background-color :skyblue}}]
+   [view {:style {:width 50 :height 50 :background-color :steelblue}}]])
 
 (defn app-root []
   [flex-direction-basics])
 
 (defn init []
-      (.registerComponent app-registry "Re-Natal Tutorial" #(r/reactify-component app-root)))
+  (.registerComponent app-registry "ReNatalTutorial" #(r/reactify-component app-root)))
