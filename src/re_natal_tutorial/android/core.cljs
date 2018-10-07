@@ -10,7 +10,7 @@
 (def styles {:bigblue {:color :blue
                        :fontWeight :bold ; clojure style :font-weight did not work
                        :fontSize 30}     ; clojure style :font-size did not work
-             :red     {:color :red}})
+             :red {:color :red}})
 
 (defn lots-of-styles []
   [view
@@ -23,4 +23,4 @@
   [lots-of-styles])
 
 (defn init []
-      (.registerComponent app-registry "Re-Natal Tutorial" #(r/reactify-component app-root)))
+  (.registerComponent app-registry "ReNatalTutorial" #(r/reactify-component app-root)))
