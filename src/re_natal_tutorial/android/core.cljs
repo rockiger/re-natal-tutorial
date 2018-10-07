@@ -7,7 +7,7 @@
 (def text (r/adapt-react-class (.-Text ReactNative)))
 (def view (r/adapt-react-class (.-View ReactNative)))
 
-;; We use function arguments instead props, 'couse our components are functions
+;; We use function arguments instead of props because our components are functions
 (defn greeting [name]
   [text (str "Hello " name "!")])
 
@@ -18,7 +18,7 @@
     (greeting "Valeera")])
 
 (defn app-root []
-  (lots-of-greetings))
+  [lots-of-greetings])
 
 (defn init []
-      (.registerComponent app-registry "Hello World" #(r/reactify-component app-root)))
+  (.registerComponent app-registry "ReNatalTutorial" #(r/reactify-component app-root)))
