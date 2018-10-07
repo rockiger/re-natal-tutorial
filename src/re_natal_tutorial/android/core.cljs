@@ -10,10 +10,6 @@
 (defn debug [obj]
   (.warn js/console (.stringify js/JSON obj)))
 
-
-(defn alert [title]
-      (.alert (.-Alert ReactNative) title))
-
 (def state (r/atom ""))
 
 ;; Get the json
@@ -27,16 +23,15 @@
               :else
               (.warn js/console "error"))))
 
-(.open request "GET" "http://facebook.github.io/react-native/movies.json")                         (.send request)
+(.open request "GET" "https://facebook.github.io/react-native/movies.json")
+(.send request)
 
-
-(defn fetch-some-movies []
-  [view {:style {:padding-top 22}}
-    [text @state]])
+(defn fetch-example []
+  [view {:style {:flex 1 :padding-top 22}}
+   [text @state]])
 
 (defn app-root []
-  [fetch-some-movies])
+  [fetch-example])
 
 (defn init []
-      (.registerComponent app-registry "Re-Natal Tutorial"
-       #(r/reactify-component app-root)))
+  (.registerComponent app-registry "ReNatalTutorial" #(r/reactify-component app-root)))
