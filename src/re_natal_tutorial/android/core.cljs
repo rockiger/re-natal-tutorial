@@ -15,12 +15,12 @@
           :flex-direction :column
           :justify-content :center
           :align-items :center}}
-    [view {:style {:width 50 :height 50 :background-color :powderblue}}]
-    [view {:style {:width 50 :height 50 :background-color :skyblue}}]
-    [view {:style {:width 50 :height 50 :background-color :steelblue}}]])
+   [view {:style {:width 50 :height 50 :background-color :powderblue}}]
+   [view {:style {:width 50 :height 50 :background-color :skyblue}}]
+   [view {:style {:width 50 :height 50 :background-color :steelblue}}]])
 
 (defn app-root []
   [align-items-basics])
 
 (defn init []
-      (.registerComponent app-registry "Re-Natal Tutorial" #(r/reactify-component app-root)))
+  (.registerComponent app-registry "ReNatalTutorial" #(r/reactify-component app-root)))
