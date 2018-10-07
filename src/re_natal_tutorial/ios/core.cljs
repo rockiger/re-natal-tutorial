@@ -1,33 +1,50 @@
 (ns re-natal-tutorial.ios.core
-  (:require [reagent.core :as r :refer [atom]]
-            [re-frame.core :refer [subscribe dispatch dispatch-sync]]
-            [re-natal-tutorial.events]
-            [re-natal-tutorial.subs]))
+  (:require [reagent.core :as r]))
 
 (def ReactNative (js/require "react-native"))
 
 (def app-registry (.-AppRegistry ReactNative))
+(def scroll-view (r/adapt-react-class (.-ScrollView ReactNative)))
+(def image (r/adapt-react-class (.-Image ReactNative)))
 (def text (r/adapt-react-class (.-Text ReactNative)))
 (def view (r/adapt-react-class (.-View ReactNative)))
-(def image (r/adapt-react-class (.-Image ReactNative)))
-(def touchable-highlight (r/adapt-react-class (.-TouchableHighlight ReactNative)))
 
-(def logo-img (js/require "./images/cljs.png"))
-
-(defn alert [title]
-      (.alert (.-Alert ReactNative) title))
+(defn i-scrolled-down []
+  [scroll-view
+   [text {:style {:font-size 96}} "Scroll me plz"]
+   [image {:source {:uri "https://facebook.github.io/react-native/img/favicon.png"} :style {:width 64 :height 64}}]
+   [image {:source {:uri "https://facebook.github.io/react-native/img/favicon.png"} :style {:width 64 :height 64}}]
+   [image {:source {:uri "https://facebook.github.io/react-native/img/favicon.png"} :style {:width 64 :height 64}}]
+   [image {:source {:uri "https://facebook.github.io/react-native/img/favicon.png"} :style {:width 64 :height 64}}]
+   [image {:source {:uri "https://facebook.github.io/react-native/img/favicon.png"} :style {:width 64 :height 64}}]
+   [text {:style {:font-size 96}} "If you like"]
+   [image {:source {:uri "https://facebook.github.io/react-native/img/favicon.png"} :style {:width 64 :height 64}}]
+   [image {:source {:uri "https://facebook.github.io/react-native/img/favicon.png"} :style {:width 64 :height 64}}]
+   [image {:source {:uri "https://facebook.github.io/react-native/img/favicon.png"} :style {:width 64 :height 64}}]
+   [image {:source {:uri "https://facebook.github.io/react-native/img/favicon.png"} :style {:width 64 :height 64}}]
+   [image {:source {:uri "https://facebook.github.io/react-native/img/favicon.png"} :style {:width 64 :height 64}}]
+   [text {:style {:font-size 96}} "Scrolling down"]
+   [image {:source {:uri "https://facebook.github.io/react-native/img/favicon.png"} :style {:width 64 :height 64}}]
+   [image {:source {:uri "https://facebook.github.io/react-native/img/favicon.png"} :style {:width 64 :height 64}}]
+   [image {:source {:uri "https://facebook.github.io/react-native/img/favicon.png"} :style {:width 64 :height 64}}]
+   [image {:source {:uri "https://facebook.github.io/react-native/img/favicon.png"} :style {:width 64 :height 64}}]
+   [image {:source {:uri "https://facebook.github.io/react-native/img/favicon.png"} :style {:width 64 :height 64}}]
+   [text {:style {:font-size 96}} "What's the best"]
+   [image {:source {:uri "https://facebook.github.io/react-native/img/favicon.png"} :style {:width 64 :height 64}}]
+   [image {:source {:uri "https://facebook.github.io/react-native/img/favicon.png"} :style {:width 64 :height 64}}]
+   [image {:source {:uri "https://facebook.github.io/react-native/img/favicon.png"} :style {:width 64 :height 64}}]
+   [image {:source {:uri "https://facebook.github.io/react-native/img/favicon.png"} :style {:width 64 :height 64}}]
+   [image {:source {:uri "https://facebook.github.io/react-native/img/favicon.png"} :style {:width 64 :height 64}}]
+   [text {:style {:font-size 96}} "Framework around"]
+   [image {:source {:uri "https://facebook.github.io/react-native/img/favicon.png"} :style {:width 64 :height 64}}]
+   [image {:source {:uri "https://facebook.github.io/react-native/img/favicon.png"} :style {:width 64 :height 64}}]
+   [image {:source {:uri "https://facebook.github.io/react-native/img/favicon.png"} :style {:width 64 :height 64}}]
+   [image {:source {:uri "https://facebook.github.io/react-native/img/favicon.png"} :style {:width 64 :height 64}}]
+   [image {:source {:uri "https://facebook.github.io/react-native/img/favicon.png"} :style {:width 64 :height 64}}]
+   [text {:style {:font-size 96}} "Re-Natal"]])
 
 (defn app-root []
-  (let [greeting (subscribe [:get-greeting])]
-    (fn []
-      [view {:style {:flex-direction "column" :margin 40 :align-items "center"}}
-       [text {:style {:font-size 30 :font-weight "100" :margin-bottom 20 :text-align "center"}} @greeting]
-       [image {:source logo-img
-               :style  {:width 80 :height 80 :margin-bottom 30}}]
-       [touchable-highlight {:style {:background-color "#999" :padding 10 :border-radius 5}
-                             :on-press #(alert "HELLO!")}
-        [text {:style {:color "white" :text-align "center" :font-weight "bold"}} "press me"]]])))
+  [i-scrolled-down])
 
 (defn init []
-      (dispatch-sync [:initialize-db])
-      (.registerComponent app-registry "ReNatalTutorial" #(r/reactify-component app-root)))
+  (.registerComponent app-registry "ReNatalTutorial" #(r/reactify-component app-root)))
